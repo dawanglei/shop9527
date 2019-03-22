@@ -31,15 +31,7 @@ export default {
     }
   },
   created() {
-    get('http://localhost:3000/api/v1/products')
-      .then(res => {
-        console.log(res)
-        this.products = res.data.products
-        this.pageCount = res.data.pages
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    this.loadData()
   },
   methods: {
     addToCartHandle(id) {
@@ -47,6 +39,9 @@ export default {
     },
     loadMore() {
       this.page += 1
+      this.loadData()
+    },
+    loadData() {
       get(`http://localhost:3000/api/v1/products?page=${this.page}`)
       .then(res => {
         // console.log(res)

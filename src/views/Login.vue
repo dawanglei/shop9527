@@ -9,6 +9,7 @@
 </template>
 <script>
 import { loginIn } from '../utils/auth'
+import { post } from 'axios'
 
 export default {
   data() {
@@ -19,14 +20,24 @@ export default {
   },
   methods: {
     loginHandle() {
-      loginIn()
-      this.$eventBus.$emit('navToZX', 'UserCenter')
-      // this.$router表示路由对象,可以在其上执行路由跳转方法
-      //  编程方式实现跳转,通过.push一个路由对象实现
-      // 当登录成功之后跳回个人中心
-      this.$router.push({
-        name: 'UserCenter'
+      post('http://localhost:3000/api/v1/auth/login', {
+        userName: this.userName,
+        password: this.password
       })
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      // loginIn()
+      // this.$eventBus.$emit('navToZX', 'UserCenter')
+      // // this.$router表示路由对象,可以在其上执行路由跳转方法
+      // //  编程方式实现跳转,通过.push一个路由对象实现
+      // // 当登录成功之后跳回个人中心
+      // this.$router.push({
+      //   name: 'UserCenter'
+      // })
     }
   }
 }
