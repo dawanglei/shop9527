@@ -14,21 +14,49 @@
       <van-button size="mini" @click="addToCartHandle(product._id)"><van-icon class="btn-cart" name="cart" /></van-button>
     </div>
     </van-card>
+    <van-button size="large" @click="loadMore">加载更多</van-button>
   </div>
 </template>
 <script>
 
-import { products } from '../data'
+// import { products } from '../data'
+import { get } from 'axios';
 
 export default {
   data() {
     return {
-      products
+      products: [],
+      page: 1,
+      pageCount: 1,
     }
+  },
+  created() {
+    get('http://localhost:3000/api/v1/products')
+      .then(res => {
+        console.log(res)
+        this.products = res.data.products
+        this.pageCount = res.data.pages
+      })
+      .catch(err => {
+        console.log(err)
+      })
   },
   methods: {
     addToCartHandle(id) {
       alert(id)
+    },
+    loadMore() {
+      this.page += 1
+      get(`http://localhost:3000/api/v1/products?page=${this.page}`)
+      .then(res => {
+        // console.log(res)
+        // 拼接服务器端的数据 使用数组的concat方法实现
+        this.products = this.products.concat(res.data.products)
+        this.pageCount = res.data.pages
+      })
+      .catch(err => {
+        console.log(err)
+      })
     }
   }
 }
