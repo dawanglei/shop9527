@@ -7,11 +7,19 @@
     <router-link :to="{ name: 'Reg' }">【注册】</router-link>
     <router-link :to="{ name: 'ShopCart' }">【购物车】</router-link>
     <router-link :to="{ name: 'UserCenter' }">【个人中心】</router-link>
+    <br>
+    <button @click="prePage">上一页</button>
   </div>
 </template>
 <script>
 export default {
-  
+  methods: {
+    prePage() {
+      // go(-1) // 可以回退一步或者多步
+      // back 回退到上一页
+      this.$router.back()
+    }
+  }
 }
 </script>
 

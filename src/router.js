@@ -91,4 +91,19 @@ router.beforeEach(function(to, from, next) {
   }
 })
 
+// afterEach在跳转之后执行
+router.afterEach(function(to, from) {
+  console.log('路由跳转之后执行')
+})
+
+// 在beforeEach之后 afterEach之前
+router.beforeResolve(function(to, from ,next) {
+  console.group('-------------')
+  console.log('路由执行了')
+  console.log(to)
+  console.log(from)
+  next()
+  console.groupEnd()
+})
+
 export default router;
