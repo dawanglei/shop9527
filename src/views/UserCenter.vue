@@ -19,6 +19,8 @@ export default {
   methods: {
     logOutHandle() {
       logOut()
+      // 派发跳转事件 控制底部导航栏选中效果
+      this.$eventBus.$emit('navToZX', 'Home')
       this.$router.push({
         name: 'Home'
       })

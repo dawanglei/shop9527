@@ -1,20 +1,64 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+  <div>
     <router-view/>
+    <div class="nav-bar">
+      <!-- active表示当前tabbar选中的索引 -->
+      <van-tabbar v-model="active" active-color="deeppink" @change="navChangeHandle">
+        <van-tabbar-item icon="home-o">首页</van-tabbar-item>
+        <van-tabbar-item icon="hot-o" dot>热卖</van-tabbar-item>
+        <van-tabbar-item icon="cart-o" info="5">购物车</van-tabbar-item>
+        <van-tabbar-item icon="manager-o">我</van-tabbar-item>
+      </van-tabbar>
+    </div>
   </div>
 </template>
+<script>
+export default {
+  created() {
+    this.$eventBus.$on('navToZX', (link) => {
+      if (link == 'UserCenter') {
+        this.active = 3;
+      }
+      if (link == 'Home') {
+        this.active = 0;
+      }
+    })
+  },
+  data() {
+    return {
+      active: 0,
+    }
+  },
+  methods: {
+    navChangeHandle() {
+      // alert(this.active)
+      switch(this.active) {
+        case 0:
+          this.$router.push({
+            name: 'Home'
+          })
+        break;
+        case 1:
+          this.$router.push({
+            name: 'List'
+          })
+        break;
+        case 2:
+          this.$router.push({
+            name: 'ShopCart'
+          })
+        break;
+        case 3:
+          this.$router.push({
+            name: 'UserCenter'
+          })
+        break;
+      }
+    }
+  }
+}
+</script>
+
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>

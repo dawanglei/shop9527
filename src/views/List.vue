@@ -1,25 +1,46 @@
 <template>
   <div class="list">
-    <h1>我是列表页</h1>
-    <router-link :to="{ name: 'Home' }">【首页】</router-link>
-    <router-link :to="{ name: 'Detail', params: { id: 1 } }">【详情】</router-link>
-    <router-link :to="{ name: 'Login' }">【登录】</router-link>
-    <router-link :to="{ name: 'Reg' }">【注册】</router-link>
-    <router-link :to="{ name: 'ShopCart' }">【购物车】</router-link>
-    <router-link :to="{ name: 'UserCenter' }">【个人中心】</router-link>
-    <br>
-    <button @click="prePage">上一页</button>
+    <van-card
+      v-for="product in products"
+      :num="product.quantity"
+      :price="product.price"
+      :desc="product.descriptions"  
+      :title="product.name"
+      :thumb="product.coverImg"
+      :key="product._id"
+      :thumb-link="`#/list/${product._id}`"
+    >
+    <div slot="footer">
+      <van-button size="mini" @click="addToCartHandle(product._id)"><van-icon class="btn-cart" name="cart" /></van-button>
+    </div>
+    </van-card>
   </div>
 </template>
 <script>
+
+import { products } from '../data'
+
 export default {
+  data() {
+    return {
+      products
+    }
+  },
   methods: {
-    prePage() {
-      // go(-1) // 可以回退一步或者多步
-      // back 回退到上一页
-      this.$router.back()
+    addToCartHandle(id) {
+      alert(id)
     }
   }
 }
 </script>
+<style>
+.list {
+  padding-bottom: 60px;
+}
+.btn-cart{
+  color: deeppink;
+  font-size: 1.2rem;
+}
+</style>
+
 
