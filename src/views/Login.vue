@@ -4,6 +4,7 @@
       <van-field v-model="userName" placeholder="请输入用户名" />
       <van-field v-model="password" type="password" placeholder="请输入密码" />
     </van-cell-group>
+    <router-link :to="{name: 'Reg'}">注册</router-link>
     <van-button @click="loginHandle" class="btn-login" type="info" size="large">登录</van-button>
   </div>
 </template>

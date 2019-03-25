@@ -6,7 +6,7 @@
       :price="product.price"
       :desc="product.descriptions"  
       :title="product.name"
-      :thumb="product.coverImg"
+      :thumb="serverUrl+product.coverImg"
       :key="product._id"
       :thumb-link="`#/list/${product._id}`"
     >
@@ -19,8 +19,9 @@
 </template>
 <script>
 
-// import { products } from '../data'
-import { get } from 'axios';
+import { getProducts } from '../services/products'
+import { addToShopCart } from '../services/users'
+import { serverUrl } from '../utils/config'
 
 export default {
   data() {
@@ -28,6 +29,7 @@ export default {
       products: [],
       page: 1,
       pageCount: 1,
+      serverUrl,
     }
   },
   created() {
@@ -35,14 +37,17 @@ export default {
   },
   methods: {
     addToCartHandle(id) {
-      alert(id)
+      // alert(id)
+      addToShopCart(id, 1)
+      this.$eventBus.$emit('addToShopCartEnd');
     },
     loadMore() {
       this.page += 1
       this.loadData()
     },
     loadData() {
-      get(`http://localhost:3000/api/v1/products?page=${this.page}`)
+      // get(`${serverUrl}/api/v1/products?page=${this.page}`)
+      getProducts({ page: this.page })
       .then(res => {
         // console.log(res)
         // 拼接服务器端的数据 使用数组的concat方法实现
