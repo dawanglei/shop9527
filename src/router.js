@@ -13,6 +13,7 @@ import { isLogined } from './utils/auth'
 Vue.use(Router)
 
 const router = new Router({
+
   routes: [{
       path: '/',
       name: 'Home',
@@ -71,12 +72,12 @@ const router = new Router({
 //  from  从哪里来
 //  next  下一个,继续执行
 router.beforeEach(function(to, from, next) {
-  console.group('路由跳转之前')
-  console.log('执行了')
-  console.log(to)
-  console.log(from)
-  console.log(next)
-  console.groupEnd()
+  // console.group('路由跳转之前')
+  // console.log('执行了')
+  // console.log(to)
+  // console.log(from)
+  // console.log(next)
+  // console.groupEnd()
   // 在next方法中传递一个路由对象当做参数执行跳转
   if (to.meta.needLogin) {
     if (isLogined()) { // 判断是否已经登录
@@ -93,17 +94,17 @@ router.beforeEach(function(to, from, next) {
 
 // afterEach在跳转之后执行
 router.afterEach(function(to, from) {
-  console.log('路由跳转之后执行')
+  //console.log('路由跳转之后执行')
 })
 
 // 在beforeEach之后 afterEach之前
 router.beforeResolve(function(to, from ,next) {
-  console.group('-------------')
-  console.log('路由执行了')
-  console.log(to)
-  console.log(from)
+  // console.group('-------------')
+  // console.log('路由执行了')
+  // console.log(to)
+  // console.log(from)
   next()
-  console.groupEnd()
+  //console.groupEnd()
 })
 
 export default router;
