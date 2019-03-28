@@ -11,4 +11,35 @@
     "__v": 0
   },
   "quantity": 3
-}
+},
+
+[
+  {
+    "product": {
+      "quantity": 49,
+      "price": 2799,
+      "_id": "5c9c8ed89c9ebd0561cc4ad1",
+      "name": "坚果-2",
+      "descriptions": "君不见青海头古来白骨无人收",
+      "coverImg": "/uploads/20190327/1553764055170.jpg",
+      "createdAt": "2019-03-28T09:07:36.834Z",
+      "updatedAt": "2019-03-28T09:07:36.834Z",
+      "__v": 0
+    },
+    "quantity": 1
+  },
+  {
+    "product": {
+      "quantity": 100,
+      "price": 4999,
+      "_id": "5c9c8e729c9ebd0561cc4ad0",
+      "name": "坚果 R1",
+      "descriptions": "君不见黄河之水天上来\n君不见高台明镜悲白发",
+      "coverImg": "/uploads/20190327/1553763952329.jpg",
+      "createdAt": "2019-03-28T09:05:54.425Z",
+      "updatedAt": "2019-03-28T09:05:54.425Z",
+      "__v": 0
+    },
+    "quantity": 1
+  }
+]

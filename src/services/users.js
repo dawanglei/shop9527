@@ -15,6 +15,7 @@ export function addToShopCart(product, quantity) {
   let myCarts = getShopCart() // 获取购物车信息
   // 查询当前商品在购物车数组中的索引
   const index = myCarts.findIndex(cart => cart.product._id== product._id)
+  
   // 判断购物车中是否存在指定的商品
   if (index > -1) {
     myCarts[index].quantity = myCarts[index].quantity + quantity;
@@ -22,6 +23,7 @@ export function addToShopCart(product, quantity) {
     myCarts.push({
       product,
       quantity,
+      
     });
   }
   localStorage.setItem('my-shopcart', JSON.stringify(myCarts)); // 保存购物车信息
