@@ -30,7 +30,7 @@
       :thumb-link="`#/list/${product._id}`"
     >
     <div slot="footer">
-      <van-button size="mini" @click="addToCartHandle(product._id)"><van-icon class="btn-cart" name="cart" /></van-button>
+      <van-button size="mini" @click="addToCartHandle(product)"><van-icon class="btn-cart" name="cart" /></van-button>
     </div>
     </van-card>
 
@@ -69,6 +69,8 @@ export default {
     addToCartHandle(id) {
       // alert(id)
       addToShopCart(id, 1)
+      
+      console.log(id)
       this.$eventBus.$emit('addToShopCartEnd');
     },
     loadMore() {
@@ -91,6 +93,7 @@ export default {
   }
 }
 </script>
+
 <style scoped>
 .swipe-img {
   width: 100%;

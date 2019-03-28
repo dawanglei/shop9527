@@ -11,7 +11,7 @@
       :thumb-link="`#/list/${product._id}`"
     >
     <div slot="footer">
-      <van-button size="mini" @click="addToCartHandle(product._id)"><van-icon class="btn-cart" name="cart" /></van-button>
+      <van-button size="mini" @click="addToCartHandle(product)"><van-icon class="btn-cart" name="cart" /></van-button>
     </div>
     </van-card>
     <van-button size="large" @click="loadMore">加载更多</van-button>
@@ -36,9 +36,11 @@ export default {
     this.loadData()
   },
   methods: {
-    addToCartHandle(id) {
-      // alert(id)
-      addToShopCart(id, 1)
+    addToCartHandle(p) {
+      //alert(id)
+      addToShopCart(p, 1)
+      p.count+=1
+      console.log(p)
       this.$eventBus.$emit('addToShopCartEnd');
     },
     loadMore() {

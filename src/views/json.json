@@ -1,0 +1,14 @@
+{
+  "product": {
+    "quantity": 10,
+    "price": 999,
+    "_id": "5c9b42e2ac022f749a0863f8",
+    "name": "pertty",
+    "descriptions": "可爱",
+    "coverImg": "/uploads/20190326/1553679043651.jpg",
+    "createdAt": "2019-03-27T09:31:14.004Z",
+    "updatedAt": "2019-03-27T09:31:14.004Z",
+    "__v": 0
+  },
+  "quantity": 3
+}
