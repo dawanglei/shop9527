@@ -5,6 +5,39 @@
         <img class="swipe-img" :src="img"/>
       </van-swipe-item>
     </van-swipe>
+
+  <div  class="louser"><span icon="volume-o"></span>
+    只配送深圳地区，16点之前下单第二天送货，16点之后下单隔天送货
+    </div>
+
+    <div>
+    <van-row gutter="24" class="liner">
+      <van-col span="6">进口水果</van-col>
+      <van-col span="6">国产水果</van-col>
+      <van-col span="6">干活真菌</van-col>
+      <van-col span="6">坚果</van-col>
+    </van-row> 
+    </div>
+
+    <van-card
+      v-for="product in products"
+      :num="product.quantity"
+      :price="product.price"
+      :desc="product.descriptions"  
+      :title="product.name"
+      :thumb="serverUrl+product.coverImg"
+      :key="product._id"
+      :thumb-link="`#/list/${product._id}`"
+    >
+    <div slot="footer">
+      <van-button size="mini" @click="addToCartHandle(product._id)"><van-icon class="btn-cart" name="cart" /></van-button>
+    </div>
+    </van-card>
+
+
+    <van-button size="large" @click="loadMore">加载更多</van-button>
+
+
   </div>
 </template>
 
@@ -12,15 +45,49 @@
 // @ is an alias to /src
 
 import { images } from '../data'
+import { getProducts } from '../services/products'
+import { addToShopCart } from '../services/users'
+import { serverUrl } from '../utils/config'
 
 export default {
   name: 'home',
   data() {
     return {
+      products: [],
+      page: 1,
+      pageCount: 1,
+      serverUrl,
       images
     }
   },
   components: {
+  },
+   created() {
+    this.loadData()
+  },
+  methods: {
+    addToCartHandle(id) {
+      // alert(id)
+      addToShopCart(id, 1)
+      this.$eventBus.$emit('addToShopCartEnd');
+    },
+    loadMore() {
+      this.page += 1
+      this.loadData()
+    },
+    loadData() {
+      // get(`${serverUrl}/api/v1/products?page=${this.page}`)
+      getProducts({ page: this.page })
+      .then(res => {
+        // console.log(res)
+        // 拼接服务器端的数据 使用数组的concat方法实现
+        this.products = this.products.concat(res.data.products)
+        this.pageCount = res.data.pages
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
   }
 }
 </script>
@@ -28,5 +95,38 @@ export default {
 .swipe-img {
   width: 100%;
 }
+.list {
+  padding-bottom: 60px;
+}
+.btn-cart{
+  color: deeppink;
+  font-size: 1.2rem;
+}
+
+*{margin: 0;padding: 0}
+  li{list-style: none}
+  a{text-decoration: none}
+  img{
+    border: 0;
+    display: block;
+  }
+  .louser{
+    height: auto;
+    font-size: 0.8rem;
+    background: #fff;
+    padding: 0.3rem;
+    overflow: hidden;
+    position: relative;
+    background: #e2e2e2
+
+  }
+  .liner{
+    text-align: center;
+    line-height: 50px;
+    height: 50px;
+    color: #666;
+    font-size: 22px;
+  
+  }
 </style>
 
