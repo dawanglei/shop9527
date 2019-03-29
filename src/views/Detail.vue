@@ -2,17 +2,17 @@
   <div class="goods">
     <van-swipe class="goods-swipe" :autoplay="3000">
       <van-swipe-item >
-        <img :src="'http://api.cat-shop.penkuoer.com'+this.product.coverImg" >
+        <img class="aa"  :src="'http://api.cat-shop.penkuoer.com'+this.product.coverImg" >
       </van-swipe-item>
     </van-swipe>
 
     <van-cell-group>
       <van-cell>
         <div class="goods-title">{{this.product.descriptions}}</div>
-        <div class="goods-price">{{this.product.price}}</div>
+        <div class="goods-price"></div>
       </van-cell>
       <van-cell class="goods-express">
-        <van-col span="10">运费：{{this.product.price}}</van-col>
+        <van-col span="10">价格：{{this.product.price}}</van-col>
         <van-col span="14">剩余：{{this.product.quantity}}</van-col>
       </van-cell>
     </van-cell-group>
@@ -26,25 +26,14 @@
       </van-cell>
       <van-cell title="线下门店" icon="location-o" is-link @click="sorry" />
     </van-cell-group>
-
+        <van-button type="warning">购买</van-button>
+        <van-button type="danger"  @click="addToCartHandle(product)">加入购物车</van-button>
     <van-cell-group class="goods-cell-group">
       <van-cell title="查看商品详情" is-link @click="sorry" />
     </van-cell-group>
 
-    <van-goods-action>
-      <van-goods-action-mini-btn icon="chat-o" @click="sorry">
-        客服
-      </van-goods-action-mini-btn>
-      <van-goods-action-mini-btn icon="cart-o" @click="onClickCart">
-        购物车
-      </van-goods-action-mini-btn>
-      <van-goods-action-big-btn @click="sorry">
-        加入购物车
-      </van-goods-action-big-btn>
-      <van-goods-action-big-btn primary @click="sorry">
-        立即购买
-      </van-goods-action-big-btn>
-    </van-goods-action>
+   
+    
   </div>
 </template>
 
@@ -52,6 +41,7 @@
 import { getProductDetail } from '../services/products'
 import { serverUrl } from '../utils/config'
 import { get } from 'axios'
+import { addToShopCart } from '../services/users'
 
 import {
   Tag,
@@ -66,6 +56,11 @@ import {
   GoodsActionBigBtn,
   GoodsActionMiniBtn
 } from 'vant';
+
+import { Button } from 'vant';
+import Vue from 'vue'
+Vue.use(Button);
+
 export default {
   components: {
     [Tag.name]: Tag,
@@ -104,7 +99,14 @@ export default {
     },
     sorry() {
       Toast('暂无后续逻辑~');
-    }
+    },
+    addToCartHandle(id) {
+      // alert(id)
+      addToShopCart(id, 1)
+      
+      console.log(id)
+      this.$eventBus.$emit('addToShopCartEnd');
+    },
   },
   created() {
     getProductDetail(this.$route.params.id)
@@ -128,6 +130,9 @@ export default {
 };
 </script>
 
-<style lang="less">
-
+<style>
+.aa{
+  width: 100%;
+  height: 15rem;
+}
 </style>

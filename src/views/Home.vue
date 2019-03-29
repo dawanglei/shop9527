@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <van-swipe :autoplay="3000" indicator-color="white">
-      <van-swipe-item v-for="(img, index) in images" :key="index">
-        <img class="swipe-img" :src="img"/>
+    <van-swipe :autoplay="3000" indicator-color="white" class="banner">
+      <van-swipe-item v-for="(img, index) in list" :key="index">
+        <img class="swipe-img" :src="serverUrl+img"/>
       </van-swipe-item>
     </van-swipe>
 
@@ -12,10 +12,10 @@
 
     <div>
     <van-row gutter="24" class="liner">
-      <van-col span="6">进口水果</van-col>
-      <van-col span="6">国产水果</van-col>
-      <van-col span="6">干活真菌</van-col>
-      <van-col span="6">坚果</van-col>
+      <van-col span="6" class="liner1">进口水果</van-col>
+      <van-col span="6" class="liner1">国产水果</van-col>
+      <van-col span="6" class="liner1">干活真菌</van-col>
+      <van-col span="6" class="liner1">坚果</van-col>
     </van-row> 
     </div>
 
@@ -36,18 +36,35 @@
 
 
     <van-button size="large" @click="loadMore">加载更多</van-button>
-
+    <van-button size="large" @click="loadMore">加载更多</van-button>
 
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+(function(){
+        /*
+         *iphone 6plus
+         *原来的尺寸                            414
+         *要变成的尺寸（以iPhone 6为基准）375    375
+         *比例                                  414/375
+         */
+        var curWidth = window.screen.width; //iphone 6plus为414px
+        var targetWidth = 375;
+        var scale = curWidth/targetWidth;
+        var meta = document.createElement("meta");
+        meta.name = "viewport";
+        meta.content = 'initial-scale='+scale+',minimum-scale='+scale+',maximum-scale='+scale+'';
+        document.head.appendChild(meta);
+    })()
 
 import { images } from '../data'
 import { getProducts } from '../services/products'
 import { addToShopCart } from '../services/users'
 import { serverUrl } from '../utils/config'
+
+import {get} from 'axios'
 
 export default {
   name: 'home',
@@ -57,7 +74,8 @@ export default {
       page: 1,
       pageCount: 1,
       serverUrl,
-      images
+      images,
+      list:[]
     }
   },
   components: {
@@ -90,6 +108,22 @@ export default {
         console.log(err)
       })
     }
+  },
+  created() {
+    
+    get('http://api.cat-shop.penkuoer.com/api/v1/products')
+      .then(res=>{
+        //console.log(res.data.products)
+        res.data.products.forEach(element => {
+          console.log(element.coverImg)
+          this.list.push(element.coverImg)
+        });
+        this.products =res.data.products
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+
   }
 }
 </script>
@@ -98,7 +132,33 @@ export default {
 .swipe-img {
   width: 100%;
 }
-.list {
+.banner{
+  width: 100%;
+ 
+}
+.banner img{
+  height:15rem
+}
+.louser{
+    height: 18px;
+    font-size: 0.8rem;
+    background: #fff;
+    padding: 0.3rem;
+    
+    background: #e2e2e2;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+.liner{
+  padding-left: 0.3rem;
+}
+.liner1{
+  color: #812812
+}
+/*.list {
   padding-bottom: 60px;
 }
 .btn-cart{
@@ -130,6 +190,12 @@ export default {
     color: #666;
     font-size: 22px;
   
+  } */
+  *{
+    margin: 0;
+    padding: 0;
   }
+
+
 </style>
 
