@@ -32,7 +32,7 @@ export default {
     this.shopCart = getShopCart()
     get('http://api.cat-shop.penkuoer.com/api/v1/products')
       .then(res=>{
-        console.log(res)
+        //console.log(res)
         this.products =res.data.products
       })
       .catch(err=>{

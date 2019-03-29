@@ -1,52 +1,84 @@
 <template>
-  <div class="list">
+  <div class="login">
+    <van-nav-bar
+      title="会员登录"
+      left-arrow
+      @click-left="onClickLeft"
+    />
     <van-cell-group>
-      <van-field v-model="userName" placeholder="请输入用户名" />
-      <van-field v-model="password" type="password" placeholder="请输入密码" />
+      <van-field v-model="username" placeholder="请输入用户名" clearable/>
+      <van-field v-model="password" type="password" placeholder="请输入密码" clearable/>
     </van-cell-group>
-    <router-link :to="{name: 'Reg'}">注册</router-link>
-    <van-button @click="loginHandle" class="btn-login" type="info" size="large">登录</van-button>
+    <van-button type="danger" size="large" class="btn-login" @click="loginHandle">登录</van-button>
+    <van-row type="flex" justify="space-between" class="box-user">
+      <van-col span="6">
+        <router-link to>找回密码</router-link>
+      </van-col>
+      <van-col span="6">
+        <router-link to="/Register">用户注册</router-link>
+      </van-col>
+    </van-row>
   </div>
 </template>
+
 <script>
-import { loginIn } from '../utils/auth'
-import { post } from 'axios'
+
+
+import { Toast } from 'vant';
+
+import { post } from "axios";
 
 export default {
+  name: "Login",
   data() {
     return {
-      userName: '',
-      password: '',
+
+        username:'',
+        password:'',
+
     }
   },
   methods: {
-    loginHandle() {
-      post('http://localhost:3000/api/v1/auth/login', {
-        userName: this.userName,
-        password: this.password
-      })
-        .then(res => {
-          console.log(res)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-      // loginIn()
-      // this.$eventBus.$emit('navToZX', 'UserCenter')
-      // // this.$router表示路由对象,可以在其上执行路由跳转方法
-      // //  编程方式实现跳转,通过.push一个路由对象实现
-      // // 当登录成功之后跳回个人中心
-      // this.$router.push({
-      //   name: 'UserCenter'
-      // })
+     loginHandle(){
+
+      post("http://api.cat-shop.penkuoer.com/api/v1/auth/login",
+      {'userName':this.username,'password':this.password})
+    .then(res=>{
+
+            if(res.data.code=="success"){
+               Toast.success('登陆成功');
+               localStorage.setItem('token',res.data.token)
+               localStorage.setItem('username',JSON.stringify(this.username))
+               this.$router.push('/')
+
+            }else{
+              alert('账号或密码错误')
+            }
+
+    })
+
+    },
+    onClickLeft(){
+      this.$router.go(-1)
     }
   }
-}
+};
 </script>
-<style>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
 .btn-login {
-  margin: 0.5rem 0;
+  margin-top: 1.5rem;
+}
+.box-user {
+  margin-top: 1rem;
+}
+.box-user a {
+  color: #999;
+  text-decoration: underline;
+}
+.login {
+  padding: 1rem;
 }
 </style>
-
 

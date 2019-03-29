@@ -9,6 +9,9 @@ import UserCenter from './views/UserCenter.vue'
 import Orders from './views/Orders.vue'
 import ShopCart from './views/ShopCart.vue'
 import { isLogined } from './utils/auth'
+import test from './views/test.vue'
+import Register from './views/Register.vue'
+
 
 Vue.use(Router)
 
@@ -18,6 +21,10 @@ const router = new Router({
       path: '/',
       name: 'Home',
       component: Home
+    }, {
+      path: '/Register',
+      name:'Register',
+      component: Register,
     }, {
       path: '/list',
       name:'List',
@@ -34,6 +41,10 @@ const router = new Router({
       path: '/login',
       name: 'Login',
       component: Login,
+    },{
+      path: '/test',
+      name: 'test',
+      component: test,
     }, {
       path: '/user_center',
       name: 'UserCenter',

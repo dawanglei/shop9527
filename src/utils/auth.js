@@ -2,14 +2,14 @@
  * 登录 把token存在sessionStorage中
  */
 export function loginIn(token) {
-  sessionStorage.setItem('token', token)
+  sessionStorage.setItem('token111', token)
 }
 
 /**
  * 通过存储的内容判断用户是否登录
  */
 export function isLogined() {
-  if (sessionStorage.getItem('token')) {
+  if (sessionStorage.getItem('token111')) {
     return true
   } else {
     return false
