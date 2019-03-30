@@ -111,7 +111,7 @@ export default {
   },
   created() {
     
-    get('http://api.cat-shop.penkuoer.com/api/v1/products')
+    get('https://api.cat-shop.penkuoer.com/api/v1/products')
       .then(res=>{
         //console.log(res.data.products)
         res.data.products.forEach(element => {

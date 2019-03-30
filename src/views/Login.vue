@@ -41,7 +41,7 @@ export default {
   methods: {
      loginHandle(){
 
-      post("http://api.cat-shop.penkuoer.com/api/v1/auth/login",
+      post("https://api.cat-shop.penkuoer.com/api/v1/auth/login",
       {'userName':this.username,'password':this.password})
     .then(res=>{
 

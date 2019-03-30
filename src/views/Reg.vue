@@ -29,7 +29,7 @@ export default {
         alert("请输入账号或者密码");
         return;
       }
-      post("http://api.cat‒shop.penkuoer.com/api/v1/auth/reg", {
+      post("https://api.cat‒shop.penkuoer.com/api/v1/auth/reg", {
         userName: this.username,
         password: this.password
       }).then(res => {

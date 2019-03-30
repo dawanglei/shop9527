@@ -75,14 +75,14 @@ export default {
   data() {
     return {
       goods: {
-        url:"http://api.cat-shop.penkuoer.com",
+        url:"https://api.cat-shop.penkuoer.com",
         title: '美国伽力果（约680g/3个）',
         price: 2680,
         express: '免运费',
         remain: 19,
         thumb: [
-          'https://img.yzcdn.cn/public_files/2017/10/24/e5a5a02309a41f9f5def56684808d9ae.jpeg',
-          'https://img.yzcdn.cn/public_files/2017/10/24/1791ba14088f9c2be8c610d0a6cc0f93.jpeg'
+          'httpss://img.yzcdn.cn/public_files/2017/10/24/e5a5a02309a41f9f5def56684808d9ae.jpeg',
+          'httpss://img.yzcdn.cn/public_files/2017/10/24/1791ba14088f9c2be8c610d0a6cc0f93.jpeg'
         ]
       },
       product:{}
@@ -115,7 +115,7 @@ export default {
       .catch(err => {
 
       });
-    // get('http://api.cat-shop.penkuoer.com/api/v1/products')
+    // get('https://api.cat-shop.penkuoer.com/api/v1/products')
     //   .then(res=>{
     //     console.log(res)
     //     this.products =res.data.products

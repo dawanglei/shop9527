@@ -8,7 +8,7 @@
         价格：{{s.product.price}}
        <span @click="countcut(index)">-</span>数量：{{s.quantity}}<span @click="countadd(index)">+</span>
        总价格：{{a(index)}}
-        <img :src="'http://api.cat-shop.penkuoer.com'+s.product.coverImg">
+        <img :src="'https://api.cat-shop.penkuoer.com'+s.product.coverImg">
         </li>
     </ul>
     <router-link :to="{ name: 'Home' }">【首页】</router-link>
@@ -30,7 +30,7 @@ export default {
   },
   created() {
     this.shopCart = getShopCart()
-    get('http://api.cat-shop.penkuoer.com/api/v1/products')
+    get('https://api.cat-shop.penkuoer.com/api/v1/products')
       .then(res=>{
         //console.log(res)
         this.products =res.data.products
@@ -66,7 +66,7 @@ export default {
         return Number(this.shopCart[index].product.price)*this.shopCart[index].quantity
     },
     huoqu(){
-      get('http://api.cat-shop.penkuoer.com/api/v1/products')
+      get('https://api.cat-shop.penkuoer.com/api/v1/products')
       .then(res=>{
         console.log(res)
         this.products =res.data.products
