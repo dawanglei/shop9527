@@ -8,7 +8,7 @@
     </van-cell-group>
     
 
-    <van-button type="danger" size="large" class="btn-login" @click="registerHandle">同意协议并注册</van-button>
+    <van-button type="primary" size="large" class="btn-login" @click="registerHandle">同意协议并注册</van-button>
 
     <van-row type="flex" justify="end">
      

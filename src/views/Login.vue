@@ -9,7 +9,7 @@
       <van-field v-model="username" placeholder="请输入用户名" clearable/>
       <van-field v-model="password" type="password" placeholder="请输入密码" clearable/>
     </van-cell-group>
-    <van-button type="danger" size="large" class="btn-login" @click="loginHandle">登录</van-button>
+    <van-button type="info" size="large" class="btn-login" @click="loginHandle">登录</van-button>
     <van-row type="flex" justify="space-between" class="box-user">
       <van-col span="6">
         <router-link to>找回密码</router-link>
