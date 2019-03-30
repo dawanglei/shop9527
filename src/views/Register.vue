@@ -41,7 +41,7 @@ export default {
         if (res.data.code == "success") {
           alert("注册成功");
           console.log(res.data.token);
-          this.$router.push("/test");
+          this.$router.push("/Login");
         } else {
           alert("用户名已被注册");
         }

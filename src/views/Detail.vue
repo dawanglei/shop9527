@@ -1,9 +1,7 @@
 <template>
   <div class="goods">
     <van-swipe class="goods-swipe" :autoplay="3000">
-      <van-swipe-item >
-        <img class="aa"  :src="'http://api.cat-shop.penkuoer.com'+this.product.coverImg" >
-      </van-swipe-item>
+      
     </van-swipe>
 
     <van-cell-group>
